@@ -1,5 +1,0 @@
-
-
-
-class Museum(object):
-    pass

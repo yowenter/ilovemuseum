@@ -6,6 +6,7 @@ import logging
 
 import queue
 from datetime import datetime
+import traceback
 
 logging.basicConfig()
 
@@ -47,17 +48,25 @@ class Engine(object):
 
             LOG.debug("Worker `%s` working on `%s`", worker_no, req)
             next_requests = await self.workflow(req)
+            LOG.debug("Worker `%s` enqueue next requests `%s`", worker_no, len(next_requests))
             if not next_requests:
                 continue
             for req in next_requests:
                 self.scheduler.enqueue_request(req)
 
     async def workflow(self, req):
-        response = await self.spider.download(req)
-        items = self.spider.parse(response)
-        next_requests = self.spider.extract(response)
-        for item in items:
-            await self.pipeline.write(item)
+        try:
+
+            response = await self.spider.download(req)
+            # items = self.spider.parse(response)
+            next_requests = self.spider.extract(response)
+            # if items:
+            #     for item in items:
+            self.pipeline.write(req, response)
+        except Exception as e:
+
+            LOG.warning("Exception: `%s`, trace `%s`", str(e), traceback.format_exc())
+            next_requests = []
 
         return next_requests
 
@@ -73,13 +82,10 @@ from imuseum_crawler.pipeline import PipeLine
 if __name__ == '__main__':
     q = queue.Queue()
     p = PipeLine()
-    s = Spider()
+    s = Spider(["http://icity.2q10.com/api/v1/imsm/users/43q3tza"])
     sche = Scheduler(q)
     engine = Engine(s, sche, p)
-
     loop = asyncio.get_event_loop()
     task = loop.create_task(engine.start())
     loop.run_until_complete(task)
     loop.close()
-
-

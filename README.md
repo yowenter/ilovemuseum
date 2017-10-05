@@ -10,7 +10,7 @@ The `ilovemuseum` is a project for who love museum too.
 
 ## RoadMap
 
- - museum collection
+ - museum crawler
  - museum search engine
  - museum recommandation sytem
 
@@ -30,4 +30,19 @@ The `ilovemuseum` is a project for who love museum too.
 
 
 
+## Architecture
 
+### imuseum_crawler
+
+爬取 博物馆、展览、人 的信息。
+项目框架主要参看 scrapy， 使用了异步非阻塞的 IO asyncio库。
+目前完成了 70% 。
+
+
+### imuseum_search
+
+imuseum 的 信息搜索。
+
+### imusuem_ai
+
+imuseum 的 推荐系统。
