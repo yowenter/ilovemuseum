@@ -16,6 +16,12 @@ imuseum_headers = {
     "IC-App-V": "IMSM-39"
 }
 
+# step 1, 在手机上安装 imuseum
+# step2, 在电脑上安装 charles 或者 mitmproxy
+# step3, 在手机上设置电脑为代理服务器
+# step4, 截获 imuseum 的 流量
+
+
 imuseum_base_url = "http://icity.2q10.com/api/v1"
 
 
