@@ -72,17 +72,11 @@ def _find_all_urls(data):
 
 
 class iMuseumDataParser(object):
-    def __init__(self, resp_json):
+    def __init__(self, request, resp_json):
         self.resp_json = resp_json
+        self.request = request
 
     def parse(self):
         data = self.resp_json.get("data")
         if not data:
             return
-
-        return [item for item in self.visit(data)]
-
-    def visit(self, data):
-        for k, v in data.items():
-            pass
-

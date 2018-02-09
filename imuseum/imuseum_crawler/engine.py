@@ -65,7 +65,7 @@ class Engine(object):
             self.pipeline.write(req, response)
         except Exception as e:
 
-            LOG.warning("Exception: `%s`, trace `%s`", str(e), traceback.format_exc())
+            LOG.warning("Exception: `%s`, traceback `%s`", str(e), traceback.format_exc())
             next_requests = []
 
         return next_requests

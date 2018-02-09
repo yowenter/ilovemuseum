@@ -7,11 +7,20 @@ class City(Model):
 
 
 class Museum(Model):
-    pass
+    fields = [
+        {
+            "key": "id",
+            "type": "string"
+        }
+    ]
 
 
 class Event(Model):
     fields = [
+        {
+            "key": "id",
+            "type": "string"
+        },
         {
             "key": "title",
             "type": "string"
@@ -50,9 +59,33 @@ class Event(Model):
 
 class User(Model):
     fields = [
-        
+        {
+            "key": "name",
+            "type": "string"
+        },
+        {
+            "key": "avatar",
+            "type": "url"
+        },
+        {
+            "key": "id",
+            "type": "string"
+        }
+
     ]
 
 
 class Activity(Model):
+    pass
+
+
+class Following(Model):
+    pass
+
+
+class Mark(Model):
+    pass
+
+
+class Like(Model):
     pass
